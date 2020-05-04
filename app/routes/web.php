@@ -18,3 +18,25 @@ Route::get('/', function () {
         ->queue(new \App\Mail\UserRegistered);
     return view('welcome');
 });
+
+Route::get('/jobs/{job}', function ($job) {
+    $user = \App\User::find(1);
+
+    for ($i = 0; $i < $job; $i++) {
+        \App\Jobs\SomeJob::dispatch($user);
+    }
+
+    return ('
+        <h1
+            style="text-align: center;
+                    margin-top: 3rem;">
+                        Done
+                        <span style="color: red !important;">
+                            !
+                        </span>
+                    </h1>');
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
