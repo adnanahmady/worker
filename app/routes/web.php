@@ -14,5 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    \Illuminate\Support\Facades\Mail::to('test@example.com')
+        ->queue(new \App\Mail\UserRegistered);
     return view('welcome');
 });
